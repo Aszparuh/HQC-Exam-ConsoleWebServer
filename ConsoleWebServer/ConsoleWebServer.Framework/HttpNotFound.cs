@@ -1,19 +1,22 @@
-﻿using System; using System.Linq;
+﻿using System;
 
-public class HttpNotFound : Exception
+namespace ConsoleWebServer.Framework
 {
-    public const string ClassName = "HttpNotFoundException";
-
-    public HttpNotFound(string message)
-        : base(message)
+    public class HttpNotFound : Exception
     {
-    }
+        public const string ClassName = "HttpNotFoundException";
 
-    public class ParserException : Exception
-    {
-        public ParserException(string message, ActionDescriptor request = null)
+        public HttpNotFound(string message)
             : base(message)
         {
+        }
+
+        public class ParserException : Exception
+        {
+            public ParserException(string message, ActionDescriptor request = null)
+                : base(message)
+            {
+            }
         }
     }
 }

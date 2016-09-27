@@ -2,11 +2,14 @@
 using System.Net;
 using System.Text;
 
-public class ContentActionResultWithoutCaching : ContentActionResult
+namespace ConsoleWebServer.Framework
 {
-    public ContentActionResultWithoutCaching(HttpRequest request, object model)
-        : base(request, model)
+    public class ContentActionResultWithoutCaching : ContentActionResult
+    {
+        public ContentActionResultWithoutCaching(HttpRequest request, object model)
+            : base(request, model)
         {
-        this.ResponseHeaders.Add(new KeyValuePair<string, string>("Cache-Control", "private, max-age=0, no-cache"));
+            this.ResponseHeaders.Add(new KeyValuePair<string, string>("Cache-Control", "private, max-age=0, no-cache"));
+        }
     }
 }

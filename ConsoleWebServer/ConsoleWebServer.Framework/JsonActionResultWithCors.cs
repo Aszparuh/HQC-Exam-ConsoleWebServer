@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
 
-public class JsonActionResultWithCors : JsonActionResult
+namespace ConsoleWebServer.Framework
 {
-    public JsonActionResultWithCors(HttpRequest request, object model, string corsSettings)
-        : base(request, model)
+    public class JsonActionResultWithCors : JsonActionResult
     {
-        this.ResponseHeaders.Add(new KeyValuePair<string, string>("Access-Control-Allow-Origin", corsSettings));
+        public JsonActionResultWithCors(HttpRequest request, object model, string corsSettings)
+            : base(request, model)
+        {
+            this.ResponseHeaders.Add(new KeyValuePair<string, string>("Access-Control-Allow-Origin", corsSettings));
+        }
     }
 }

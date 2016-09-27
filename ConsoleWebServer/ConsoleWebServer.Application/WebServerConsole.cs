@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Text;
+using ConsoleWebServer.Framework;
 
 namespace ConsoleWebServer.Application
 {
-    public class WebServerConsole5
+    public class WebServerConsole
     {
         private readonly ResponseProvider responseProvider;
 
-        public WebServerConsole5()
+        public WebServerConsole()
         {
             this.responseProvider = new ResponseProvider();
         }

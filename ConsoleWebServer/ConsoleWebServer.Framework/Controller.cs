@@ -1,19 +1,22 @@
-﻿public abstract class Controller
+﻿namespace ConsoleWebServer.Framework
 {
-    protected Controller(HttpRequest r)
+    public abstract class Controller
     {
-        this.Request = r;
-    }
+        protected Controller(HttpRequest r)
+        {
+            this.Request = r;
+        }
 
-    public HttpRequest Request { get; private set; }
+        public HttpRequest Request { get; private set; }
 
-    protected IActionResult Content(object model)
-    {
-        return new ContentActionResult(this.Request, model);
-    }
+        protected IActionResult Content(object model)
+        {
+            return new ContentActionResult(this.Request, model);
+        }
 
-    protected IActionResult Json(object model)
-    {
-        return new JsonActionResult(this.Request, model);
+        protected IActionResult Json(object model)
+        {
+            return new JsonActionResult(this.Request, model);
+        }
     }
 }
