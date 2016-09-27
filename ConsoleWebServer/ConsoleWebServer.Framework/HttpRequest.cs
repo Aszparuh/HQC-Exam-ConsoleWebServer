@@ -7,12 +7,12 @@ namespace ConsoleWebServer.Framework
 {
     public class HttpRequest
     {
-        public HttpRequest(string m, string uri, string httpVersion)
+        public HttpRequest(string method, string uri, string httpVersion)
         {
             this.ProtocolVersion = Version.Parse(httpVersion.ToLower().Replace("HTTP/".ToLower(), string.Empty));
             this.Headers = new SortedDictionary<string, ICollection<string>>();
             this.Uri = uri;
-            this.Method = m;
+            this.Method = method;
             this.Action = new ActionDescriptor(uri);
         }
 
@@ -56,9 +56,9 @@ namespace ConsoleWebServer.Framework
             return sb.ToString();
         }
 
-        public HttpRequest Parse(string reqAsStr)
+        public HttpRequest Parse(string requestAsString)
         {
-            var textReader = new StringReader(reqAsStr);
+            var textReader = new StringReader(requestAsString);
             var firstLine = textReader.ReadLine();
             var requestObject = this.CreateRequest(firstLine);
 
@@ -71,9 +71,9 @@ namespace ConsoleWebServer.Framework
             return requestObject;
         }
 
-        private HttpRequest CreateRequest(string frl)
+        private HttpRequest CreateRequest(string firstRequestLine)
         {
-            var firstRequestLineParts = frl.Split(' ');
+            var firstRequestLineParts = firstRequestLine.Split(' ');
             if (firstRequestLineParts.Length != 3)
             {
                 throw new HttpNotFound.ParserException(
@@ -88,12 +88,12 @@ namespace ConsoleWebServer.Framework
             return requestObject;
         }
 
-        private void AddHeaderToRequest(HttpRequest r, string headerLine)
+        private void AddHeaderToRequest(HttpRequest request, string headerLine)
         {
-            var hp = headerLine.Split(new[] { ':' }, 2);
-            var hn = hp[0].Trim();
-            var hv = hp.Length == 2 ? hp[1].Trim() : string.Empty;
-            r.AddHeader(hn, hv);
+            var headerLineParts = headerLine.Split(new[] { ':' }, 2);
+            var headerName = headerLineParts[0].Trim();
+            var headerValue = headerLineParts.Length == 2 ? headerLineParts[1].Trim() : string.Empty;
+            request.AddHeader(headerName, headerValue);
         }
     }
 }
