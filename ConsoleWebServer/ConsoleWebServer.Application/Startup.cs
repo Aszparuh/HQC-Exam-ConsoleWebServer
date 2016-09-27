@@ -1,6 +1,12 @@
-﻿// TODO: Describe patterns, SOLID, bugs and bottleneck in Documentation.txt
-public static class БръмБръм
+﻿namespace ConsoleWebServer.Application
 {
-    public static void Main(int a)
-    {var webSever = new WebServerConsole5();webSever.Start()}
-};
+    public static class Startup
+    {
+        // TODO: Describe patterns, SOLID, bugs and bottleneck in Documentation.txt
+        public static void Main()
+        {
+            var webSever = new WebServerConsole5();
+            webSever.Start();
+        }
+    }
+}

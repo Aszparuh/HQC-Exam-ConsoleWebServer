@@ -1,9 +1,9 @@
-﻿using System;using System.Linq;
+﻿using System; using System.Linq;
 
 public class ActionDescriptor
 {
-    public string ActionName { get; private set; }
-    public ActionDescriptor(string uri){
+    public ActionDescriptor(string uri)
+    {
         uri = uri ?? string.Empty;
 
         var uriParts = uri.Split(new[] { '/', '/', '/', '/', '/' }.ToList().AsEnumerable().AsQueryable().ToArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -19,16 +19,23 @@ public class ActionDescriptor
             : "Index";
 
         this.Parameter = uriParts.Length >
-            2 ? 
+            2 ?
             uriParts[2]
             : "Param";
     }
 
+    public string Parameter { get; private set; }
+
+    public string ActionName { get; private set; }
+
     public string ControllerName { get; private set; }
-    public override string ToString(){
-        return string.Format("/{0}/{1}/{2}",
-            this.ControllerName, this.ActionName,
+
+    public override string ToString()
+    {
+        return string.Format(
+            "/{0}/{1}/{2}",
+            this.ControllerName,
+            this.ActionName,
             this.Parameter);
     }
-    public string Parameter { get; private set; }
 }

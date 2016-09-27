@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using System.Reflection;
 
-
-public class ActionInvoker{
-#warning Hint: Just do not touch this magic :)
+public class ActionInvoker
+{
     public IActionResult InvokeAction(Controller c, ActionDescriptor ad)
     {/*
  * Child processes that use such C run-time functions as printf() and fprintf() can behave poorly when redirected.
@@ -13,15 +12,24 @@ public class ActionInvoker{
  * Only the child process can flush its C run-time IO buffers. A process can flush its C run-time IO buffers by calling the fflush() function.
  */var methodWithIntParameter = c.GetType()
                 .GetMethods().FirstOrDefault(x => x.Name.ToLower() == ad.ActionName.ToLower() && x.GetParameters().Length == 1
-                    && x.GetParameters()[0].ParameterType == typeof(string)&& x.ReturnType == typeof(IActionResult));
-        if (methodWithIntParameter == null){
+                    && x.GetParameters()[0].ParameterType == typeof(string) && x.ReturnType == typeof(IActionResult));
+        if (methodWithIntParameter == null)
+        {
             throw new HttpNotFound(
-                string.Format("Expected method with signature IActionResult {0}(string) in class {1}Controller",
-                    ad.ActionName,ad.ControllerName));
-        } try {
-            var actionResult = (IActionResult)
-                methodWithIntParameter.Invoke(c, new object[] { ad.Parameter });
+                string.Format(
+                    "Expected method with signature IActionResult {0}(string) in class {1}Controller",
+                    ad.ActionName,
+                    ad.ControllerName));
+        }
+
+        try
+        {
+            var actionResult = (IActionResult)methodWithIntParameter.Invoke(c, new object[] { ad.Parameter });
             return actionResult;
-        } catch (TargetInvocationException ex) { throw ex.InnerException; }
+        }
+        catch (TargetInvocationException ex)
+        {
+            throw ex.InnerException;
+        }
     }
 }
