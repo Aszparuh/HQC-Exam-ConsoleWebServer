@@ -1,4 +1,6 @@
-﻿namespace ConsoleWebServer.Framework
+﻿using ConsoleWebServer.Framework.ActionResults.Contracts;
+
+namespace ConsoleWebServer.Framework
 {
     internal class NewActionInvoker
     {

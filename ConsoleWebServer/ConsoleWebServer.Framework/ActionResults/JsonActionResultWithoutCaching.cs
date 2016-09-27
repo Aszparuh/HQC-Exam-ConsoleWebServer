@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleWebServer.Framework
+namespace ConsoleWebServer.Framework.ActionResults
 {
     public class JsonActionResultWithoutCaching : JsonActionResult
     {

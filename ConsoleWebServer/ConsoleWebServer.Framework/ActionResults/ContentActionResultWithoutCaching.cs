@@ -2,7 +2,7 @@
 using System.Net;
 using System.Text;
 
-namespace ConsoleWebServer.Framework
+namespace ConsoleWebServer.Framework.ActionResults
 {
     public class ContentActionResultWithoutCaching : ContentActionResult
     {

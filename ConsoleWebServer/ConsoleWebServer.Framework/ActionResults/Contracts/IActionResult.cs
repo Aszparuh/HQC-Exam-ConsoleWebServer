@@ -1,4 +1,4 @@
-﻿namespace ConsoleWebServer.Framework
+﻿namespace ConsoleWebServer.Framework.ActionResults.Contracts
 {
     public interface IActionResult
     {

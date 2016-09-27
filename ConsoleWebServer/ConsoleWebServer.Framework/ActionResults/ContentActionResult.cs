@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using Newtonsoft.Json;
+using ConsoleWebServer.Framework.ActionResults.Contracts;
 
-namespace ConsoleWebServer.Framework
+namespace ConsoleWebServer.Framework.ActionResults
 {
-    public class JsonActionResult : IActionResult
+    public class ContentActionResult : IActionResult
     {
         private readonly object model;
 
-        public JsonActionResult(HttpRequest request, object model)
+        public ContentActionResult(HttpRequest request, object model)
         {
             this.model = model;
             this.Request = request;
@@ -19,19 +19,9 @@ namespace ConsoleWebServer.Framework
 
         public HttpRequest Request { get; private set; }
 
-        public virtual HttpStatusCode GetStatusCode()
-        {
-            return HttpStatusCode.OK;
-        }
-
-        public string GetContent()
-        {
-            return JsonConvert.SerializeObject(this.model);
-        }
-
         public HttpResponse GetResponse()
         {
-            var response = new HttpResponse(this.Request.ProtocolVersion, this.GetStatusCode(), this.GetContent(), ContentTypeProvider.GetContentType());
+            var response = new HttpResponse(this.Request.ProtocolVersion, HttpStatusCode.OK, this.model.ToString(), "text/plain; charset=utf-8");
             foreach (var responseHeader in this.ResponseHeaders)
             {
                 response.AddHeader(responseHeader.Key, responseHeader.Value);
@@ -40,4 +30,5 @@ namespace ConsoleWebServer.Framework
             return response;
         }
     }
+
 }
