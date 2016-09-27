@@ -1,6 +1,6 @@
 ﻿namespace ConsoleWebServer.Framework
 {
-    internal class HighQualityCodeExamPointsProvider
+    internal class ContentTypeProvider
     {
         public static string GetContentType()
         {
