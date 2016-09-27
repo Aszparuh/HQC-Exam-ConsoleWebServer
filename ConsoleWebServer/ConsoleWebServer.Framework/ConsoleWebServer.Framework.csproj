@@ -74,7 +74,6 @@
     <Compile Include="ContentActionResultWithCorsWithoutCaching.cs" />
     <Compile Include="ContentActionResultWithCors{TResult}.cs" />
     <Compile Include="ContentActionResultWithoutCaching.cs" />
-    <Compile Include="HighQualityCodeExamPointsProvider.cs" />
     <Compile Include="HttpResponse.cs" />
     <Compile Include="JsonActionResult.cs" />
     <Compile Include="ContentActionResult.cs" />
