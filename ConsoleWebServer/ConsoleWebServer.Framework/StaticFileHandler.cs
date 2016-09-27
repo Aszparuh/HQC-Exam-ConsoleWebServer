@@ -9,8 +9,11 @@ namespace ConsoleWebServer.Framework
     {
         public bool CanHandle(HttpRequest request)
         {
-            return request.Uri.LastIndexOf(".", StringComparison.Ordinal)
-                    > request.Uri.LastIndexOf("/", StringComparison.Ordinal);
+            var lastIndexOfDot = request.Uri.LastIndexOf(".", StringComparison.Ordinal);
+            var lastIndexOfForwardSlash = request.Uri.LastIndexOf("/", StringComparison.Ordinal);
+            var result = lastIndexOfDot > lastIndexOfForwardSlash;
+
+            return result;
         }
 
         public HttpResponse Handle(HttpRequest request)
@@ -35,16 +38,16 @@ namespace ConsoleWebServer.Framework
 
             try
             {
-                var f = Directory.GetFiles(path);
-                if (f.Contains(filePath))
+                var file = Directory.GetFiles(path);
+                if (file.Contains(filePath))
                 {
                     return true;
                 }
 
-                var d = Directory.GetDirectories(path);
-                foreach (var dd in d)
+                var directories = Directory.GetDirectories(path);
+                foreach (var directory in directories)
                 {
-                    if (this.FileExists(dd, filePath, depth - 1))
+                    if (this.FileExists(directory, filePath, depth - 1))
                     {
                         return true;
                     }
