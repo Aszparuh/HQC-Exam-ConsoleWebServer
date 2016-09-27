@@ -8,10 +8,10 @@ namespace ConsoleWebServer.Framework
     {
         private readonly object model;
 
-        public JsonActionResult(HttpRequest rq, object m)
+        public JsonActionResult(HttpRequest request, object model)
         {
-            this.model = m;
-            this.Request = rq;
+            this.model = model;
+            this.Request = request;
             this.ResponseHeaders = new List<KeyValuePair<string, string>>();
         }
 
